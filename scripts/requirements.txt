@@ -1,4 +1,0 @@
-numpy==1.17.3
-psutil==5.8.0
-requests==2.22.0
-spacy==2.2.3

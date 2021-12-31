@@ -64,7 +64,7 @@ if __name__=="__main__":
 
     print("LOG FILE: {csv_log_file}\n".format(csv_log_file=csv_log_file))
     log_file_obj = open(csv_log_file, 'a')
-    log_file_obj.write("container_name,app_port,vespa_port,cpu_percent,memory_percent,step\n")
+    log_file_obj.write("container_name,app_port,vespa_port,cpu_percent,memory_percent,step,schema\n")
 
 
     try:
@@ -83,6 +83,7 @@ if __name__=="__main__":
                 app_folders.append(new_app_loc)
             else:
                 app_folders.append(app_location)
+            new_schema = new_schema.replace("\n", " ").replace("\r"," ")
             create_app(i, log_file_obj, app_location=new_app_loc, app_info=new_schema)
             if psutil.virtual_memory().percent>90:
                 print("Memory is full. Deleting all apps")
