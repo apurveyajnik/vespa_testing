@@ -13,7 +13,7 @@ from multi_app_deployment_via_cmd import create_app, delete_all_apps
 from app_dep_schema_variation import create_schema
 
 """
-The experiment performed in via this script is to deploy applications with multiple schemas.
+The experiment performed via this script is to deploy applications with multiple schemas.
 """
 
 app_location = "/home/ubuntu/application-pkgs/my-app"
