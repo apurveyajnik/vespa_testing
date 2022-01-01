@@ -52,7 +52,12 @@ def create_app(container_idx, log_file_obj, app_location=app_location, app_info=
         time.sleep(sleep_time[i])
         print("\n")
     
-def delete_all_apps(num_apps):
+def delete_all_apps(num_apps, container_name=""):
+    if container_name:
+        app_run_cmd = """ sudo docker rm -f {container_name} """.format(container_name=container_name)
+        os.system(app_run_cmd)
+        print("App {} Deleted".format(container_name))
+        return
     for i in range(num_apps):
         container_name = 'vespa' + str(i)
         app_run_cmd = """ sudo docker rm -f {container_name} """.format(container_name=container_name)

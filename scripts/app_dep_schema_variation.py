@@ -96,8 +96,7 @@ if __name__=="__main__":
         print(traceback.print_exc())
     
     print("LOG FILE: {csv_log_file}\n".format(csv_log_file=csv_log_file))
-
-
+    log_file_obj.close()
 
 
     
