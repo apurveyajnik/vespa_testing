@@ -43,12 +43,15 @@ def create_app(container_idx, log_file_obj, app_location=app_location, app_info=
         if not app_run_cmd[i]:
             break
         print(app_run_cmd[i])
-        os.system(app_run_cmd[i])
+        t0 = time.time()
+        out = os.system(app_run_cmd[i])
+        t1 = time.time()
+        tm = t1-t0 if out==0 else -1
         print("CPU : {cpu}  Mem: {mem}".format(cpu=psutil.cpu_percent(), mem=psutil.virtual_memory().percent))
     
-        log_file_obj.write("{container_name},{app_port},{vespa_port},{cpu},{mem},{step},{info}\n".
+        log_file_obj.write("{container_name},{app_port},{vespa_port},{cpu},{mem},{step},{tm},{info}\n".
         format(container_name=container_name, app_port=app_port, vespa_port=vespa_port,
-               cpu=psutil.cpu_percent(), mem=psutil.virtual_memory().percent, step=steps[i], info=app_info))
+               cpu=psutil.cpu_percent(), mem=psutil.virtual_memory().percent, step=steps[i],tm=tm, info=app_info))
         time.sleep(sleep_time[i])
         print("\n")
     

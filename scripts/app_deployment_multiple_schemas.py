@@ -1,4 +1,4 @@
-import re
+import os
 import argparse
 import psutil
 import shutil
@@ -60,11 +60,12 @@ if __name__=="__main__":
         mem = psutil.virtual_memory().percent
         while mem<90:
             print( "App Count : {i}".format(i=i+1))
-            create_app(i, log_file_obj, app_location=app_location, app_info=services)
-            mem = psutil.virtual_memory().percent
+            if i in [1000, 5000, 10000, 20000, 30000, 50000, 80000, 100000]:
+                create_app(i, log_file_obj, app_location=app_location, app_info=services)
+                mem = psutil.virtual_memory().percent
+                delete_all_apps(num_apps=1, container_name= 'vespa' + str(i))
             services = add_schema(i+1, base_schema=original_schema, 
-                            base_schema_path=app_location+"/schemas/" + base_schema_file)
-            delete_all_apps(num_apps=1, container_name= 'vespa' + str(i))
+                                base_schema_path=app_location+"/schemas/" + base_schema_file)
             i+=1
     except Exception as e:
         print(e)
